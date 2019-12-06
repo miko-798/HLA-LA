@@ -350,6 +350,11 @@ if($samtools_T)
 	die "File $samtools_T specified via --samtools_T not existing" unless(-e $samtools_T);
 }
 my $view_T_switch = ($samtools_T) ? " -T $samtools_T " : "";
+print "samtools_bin: $samtools_bin"
+print "threads_minus_1: $threads_minus_1" 
+print "view_T_switch: $view_T_switch"
+print "target_extraction_mapped: $target_extraction_mapped"
+
 my $extraction_command = qq($samtools_bin view -\@ $threads_minus_1 $view_T_switch -bo $target_extraction_mapped $BAM ).join(' ', @refIDs_for_extraction);
 print "Extract reads from ", scalar(@refIDs_for_extraction), " regions...\n";
 if(system($extraction_command) != 0)
